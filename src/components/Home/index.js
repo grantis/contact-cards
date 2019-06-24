@@ -2,14 +2,14 @@ import React from 'react';
 import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
-import Messages from '../Messages';
+import Contacts from '../Contacts';
 
 const HomePage = () => (
   <div>
-    <h1>Home Page</h1>
+    <h1>Create a business card.</h1>
     <p>The Home Page is accessible by every signed in user.</p>
 
-    <Messages />
+    <Contacts />
   </div>
 );
 

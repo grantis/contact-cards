@@ -3,12 +3,13 @@ import 'firebase/auth';
 import 'firebase/database';
 
 const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  apiKey: 'AIzaSyBKepFvPoQEUHFxqKBg4etwD0UCtu3VJLI',
+  authDomain: 'contactcardsv2.firebaseapp.com',
+  databaseURL: 'https://contactcardsv2.firebaseio.com',
+  projectId: 'contactcardsv2',
+  storageBucket: 'contactcardsv2.appspot.com',
+  messagingSenderId: '611158733931',
+  appId: '1:611158733931:web:9638ef9885465f84',
 };
 
 class Firebase {
@@ -71,10 +72,10 @@ class Firebase {
           .then(snapshot => {
             const dbUser = snapshot.val();
 
-            // default empty roles
-            if (!dbUser.roles) {
-              dbUser.roles = {};
-            }
+            // // default empty roles
+            // if (!dbUser.roles) {
+            //   dbUser.roles = {};
+            // }
 
             // merge auth and db user
             authUser = {
@@ -100,9 +101,9 @@ class Firebase {
 
   // *** Message API ***
 
-  message = uid => this.db.ref(`messages/${uid}`);
+  contact = uid => this.db.ref(`contacts/${uid}`);
 
-  messages = () => this.db.ref('messages');
+  contacts = () => this.db.ref('contacts');
 }
 
 export default Firebase;

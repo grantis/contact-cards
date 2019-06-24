@@ -55,16 +55,7 @@ class UserList extends Component {
               <span>
                 <strong>Username:</strong> {user.username}
               </span>
-              <span>
-                <Link
-                  to={{
-                    pathname: `${ROUTES.ADMIN}/${user.uid}`,
-                    state: { user },
-                  }}
-                >
-                  Details
-                </Link>
-              </span>
+              
             </li>
           ))}
         </ul>
