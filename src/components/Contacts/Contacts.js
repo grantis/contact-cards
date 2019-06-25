@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import ContactList from './ContactList';
+import ContactForm from './ContactForm';
+import Container from '@material-ui/core/Container';
 
 class Contacts extends Component {
   constructor(props) {
@@ -150,71 +152,45 @@ class Contacts extends Component {
     return (
       <AuthUserContext.Consumer>
         {authUser => (
-          <div>
-            {!loading && contacts && (
-              <button type="button" onClick={this.onNextPage}>
-                More
-              </button>
-            )}
+          <Container>
+            <div>
+              {!loading && contacts && (
+                <button type="button" onClick={this.onNextPage}>
+                  More
+                </button>
+              )}
 
-            {loading && <div>Loading ...</div>}
+              {loading && <div>Loading ...</div>}
+              <Container maxWidth="sm">
+                <ContactForm
+                  authUser={authUser}
+                  name={name}
+                  jobTitle={jobTitle}
+                  company={company}
+                  phoneNumber={phoneNumber}
+                  email={email}
+                  url={url}
+                  onCreateContact={this.onCreateContact}
+                  onChangeName={this.onChangeName}
+                  onChangeJobTitle={this.onChangeJobTitle}
+                  onChangeCompany={this.onChangeCompany}
+                  onChangePhoneNumber={this.onChangePhoneNumber}
+                  onChangeEmail={this.onChangeEmail}
+                  onChangeUrl={this.onChangeUrl}
+                />
+              </Container>
+              {contacts && (
+                <ContactList
+                  authUser={authUser}
+                  contacts={contacts}
+                  onEditContact={this.onEditContact}
+                  onRemoveContact={this.onRemoveContact}
+                />
+              )}
 
-            {contacts && (
-              <ContactList
-                authUser={authUser}
-                contacts={contacts}
-                onEditContact={this.onEditContact}
-                onRemoveContact={this.onRemoveContact}
-              />
-            )}
-
-            {!contacts && <div>There are no contacts ...</div>}
-
-            <form
-              onSubmit={event =>
-                this.onCreateContact(event, authUser)
-              }
-            >
-              <input
-                type="text"
-                placeholder="name"
-                value={name}
-                onChange={this.onChangeName}
-              />
-              <input
-                type="text"
-                placeholder="Job Title"
-                value={jobTitle}
-                onChange={this.onChangeJobTitle}
-              />
-              <input
-                type="text"
-                placeholder="url"
-                value={url}
-                onChange={this.onChangeUrl}
-              />
-              <input
-                type="text"
-                placeholder="company"
-                value={company}
-                onChange={this.onChangeCompany}
-              />
-              <input
-                type="text"
-                placeholder="email"
-                value={email}
-                onChange={this.onChangeEmail}
-              />
-              <input
-                type="text"
-                placeholder="phoneNumber"
-                value={phoneNumber}
-                onChange={this.onChangePhoneNumber}
-              />
-
-              <button type="submit">Send</button>
-            </form>
-          </div>
+              {!contacts && <div>There are no contacts ...</div>}
+            </div>
+          </Container>
         )}
       </AuthUserContext.Consumer>
     );

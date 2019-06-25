@@ -7,8 +7,6 @@ import Contacts from '../Contacts';
 const HomePage = () => (
   <div>
     <h1>Create a business card.</h1>
-    <p>The Home Page is accessible by every signed in user.</p>
-
     <Contacts />
   </div>
 );
