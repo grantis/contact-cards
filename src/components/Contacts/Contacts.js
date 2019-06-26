@@ -5,6 +5,7 @@ import { withFirebase } from '../Firebase';
 import ContactList from './ContactList';
 import ContactForm from './ContactForm';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 class Contacts extends Component {
   constructor(props) {
@@ -183,9 +184,13 @@ class Contacts extends Component {
                 />
               )}
               {!loading && contacts && (
-                <button type="button" onClick={this.onNextPage}>
+                <Button
+                  size="small"
+                  type="button"
+                  onClick={this.onNextPage}
+                >
                   More
-                </button>
+                </Button>
               )}
               {!contacts && <div>There are no contacts ...</div>}
             </div>

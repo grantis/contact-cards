@@ -15,6 +15,9 @@ const EditCardOptions = props => {
     onChangeEditName,
     onChangeEditJobTitle,
     onChangeEditCompany,
+    onChangeEditPhoneNumber,
+    onChangeEditEmail,
+    onChangeEditUrl,
   } = props;
   return (
     <CardContent>
@@ -33,10 +36,46 @@ const EditCardOptions = props => {
         value={editCompany}
         onChange={onChangeEditCompany}
       />
+      <input
+        type="text"
+        value={editPhoneNumber}
+        onChange={onChangeEditPhoneNumber}
+      />
+      <input
+        type="text"
+        value={editEmail}
+        onChange={onChangeEditEmail}
+      />
+      <input type="text" value={editUrl} onChange={onChangeEditUrl} />
     </CardContent>
   );
 };
 
+const ContactCardContent = props => {
+  const { contact } = props;
+  return (
+    <CardContent>
+      <Typography variant="h2" component="h2">
+        <p>{contact.name}</p>
+      </Typography>
+      <Typography variant="h3" component="h2">
+        <p>{contact.jobTitle}</p>
+      </Typography>
+      <Typography variant="h5" component="h2">
+        <p>{contact.company}</p>
+      </Typography>
+      <Typography variant="h5" component="h2">
+        <p>{contact.phoneNumber}</p>
+      </Typography>
+      <Typography variant="h5" component="h2">
+        <p>{contact.email}</p>
+      </Typography>
+      <Typography variant="h5" component="h2">
+        <p>{contact.url}</p>
+      </Typography>
+    </CardContent>
+  );
+};
 class ContactItem extends Component {
   constructor(props) {
     super(props);
@@ -62,12 +101,20 @@ class ContactItem extends Component {
   onChangeEditName = event => {
     this.setState({ editName: event.target.value });
   };
-
   onChangeEditJobTitle = event => {
     this.setState({ editJobTitle: event.target.value });
   };
   onChangeEditCompany = event => {
     this.setState({ editCompany: event.target.value });
+  };
+  onChangeEditPhoneNumber = event => {
+    this.setState({ editPhoneNumber: event.target.value });
+  };
+  onChangeEditEmail = event => {
+    this.setState({ editEmail: event.target.value });
+  };
+  onChangeEditUrl = event => {
+    this.setState({ editUrl: event.target.value });
   };
 
   onSaveEditContact = async () => {
@@ -118,48 +165,38 @@ class ContactItem extends Component {
             onChangeEditName={this.onChangeEditName}
             onChangeEditJobTitle={this.onChangeEditJobTitle}
             onChangeEditCompany={this.onChangeEditCompany}
+            onChangeEditPhoneNumber={this.onChangeEditPhoneNumber}
+            onChangeEditEmail={this.onChangeEditEmail}
+            onChangeEditUrl={this.onChangeEditUrl}
           />
         ) : (
-          <CardContent>
-            <Typography variant="h5" component="h2">
-              <p>{contact.name}</p>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <p>{contact.jobTitle}</p>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <p>{contact.company}</p>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <p>{contact.phoneNumber}</p>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <p>{contact.email}</p>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <p>{contact.url}</p>
-            </Typography>
-          </CardContent>
+          <ContactCardContent contact={contact} />
         )}
 
         {authUser.uid === contact.userId && (
           <span>
             {editMode ? (
               <span>
-                <button onClick={this.onSaveEditContact}>Save</button>
-                <button onClick={this.onToggleEditMode}>Reset</button>
+                <Button size="small" onClick={this.onSaveEditContact}>
+                  Save
+                </Button>
+                <Button size="small" onClick={this.onToggleEditMode}>
+                  Reset
+                </Button>
               </span>
             ) : (
-              <button onClick={this.onToggleEditMode}>Edit</button>
+              <Button size="small" onClick={this.onToggleEditMode}>
+                Edit
+              </Button>
             )}
 
             {!editMode && (
-              <button
-                type="button"
+              <Button
+                size="small"
                 onClick={() => onRemoveContact(contact.uid)}
               >
                 Delete
-              </button>
+              </Button>
             )}
           </span>
         )}
