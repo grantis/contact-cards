@@ -6,7 +6,6 @@ import Contacts from '../Contacts';
 
 const HomePage = () => (
   <div>
-    <h1>Create a business card.</h1>
     <Contacts />
   </div>
 );

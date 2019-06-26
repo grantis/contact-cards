@@ -1,4 +1,41 @@
 import React, { Component } from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+const EditCardOptions = props => {
+  const {
+    editName,
+    editJobTitle,
+    editCompany,
+    editPhoneNumber,
+    editEmail,
+    editUrl,
+    onChangeEditName,
+    onChangeEditJobTitle,
+    onChangeEditCompany,
+  } = props;
+  return (
+    <CardContent>
+      <input
+        type="text"
+        value={editName}
+        onChange={onChangeEditName}
+      />
+      <input
+        type="text"
+        value={editJobTitle}
+        onChange={onChangeEditJobTitle}
+      />
+      <input
+        type="text"
+        value={editCompany}
+        onChange={onChangeEditCompany}
+      />
+    </CardContent>
+  );
+};
 
 class ContactItem extends Component {
   constructor(props) {
@@ -6,54 +43,110 @@ class ContactItem extends Component {
 
     this.state = {
       editMode: false,
-      editText: this.props.contact.name,
+      editName: this.props.contact.name,
+      editJobTitle: this.props.contact.jobTitle,
+      editCompany: this.props.contact.company,
+      editPhoneNumber: this.props.contact.phoneNumber,
+      editEmail: this.props.contact.email,
+      editUrl: this.props.contact.url,
     };
   }
 
-  onToggleEditMode = () => {
-    this.setState(state => ({
+  onToggleEditMode = async () => {
+    await this.setState(state => ({
       editMode: !state.editMode,
-      editText: this.props.contact.name,
+      editName: this.props.contact.name,
     }));
   };
 
-  onChangeEditText = event => {
-    this.setState({ editText: event.target.value });
+  onChangeEditName = event => {
+    this.setState({ editName: event.target.value });
   };
 
-  onSaveEditText = () => {
-    this.props.onEditContact(this.props.contact, this.state.editText);
+  onChangeEditJobTitle = event => {
+    this.setState({ editJobTitle: event.target.value });
+  };
+  onChangeEditCompany = event => {
+    this.setState({ editCompany: event.target.value });
+  };
 
-    this.setState({ editMode: false });
+  onSaveEditContact = async () => {
+    const {
+      editName,
+      editJobTitle,
+      editCompany,
+      editPhoneNumber,
+      editEmail,
+      editUrl,
+    } = this.state;
+    this.props.onEditContact(
+      this.props.contact,
+      this.props.authUser,
+      editName,
+      editJobTitle,
+      editCompany,
+      editPhoneNumber,
+      editEmail,
+      editUrl,
+    );
+
+    await this.setState({ editMode: false });
   };
 
   render() {
     const { authUser, contact, onRemoveContact } = this.props;
-    const { editMode, editText } = this.state;
+    const {
+      editMode,
+      editName,
+      editJobTitle,
+      editCompany,
+      editPhoneNumber,
+      editEmail,
+      editUrl,
+    } = this.state;
 
     return (
-      <li>
+      <Card>
         {editMode ? (
-          <input
-            type="text"
-            value={editText}
-            onChange={this.onChangeEditText}
+          <EditCardOptions
+            editName={editName}
+            editJobTitle={editJobTitle}
+            editCompany={editCompany}
+            editPhoneNumber={editPhoneNumber}
+            editEmail={editEmail}
+            editUrl={editUrl}
+            onChangeEditName={this.onChangeEditName}
+            onChangeEditJobTitle={this.onChangeEditJobTitle}
+            onChangeEditCompany={this.onChangeEditCompany}
           />
         ) : (
-          <span>
-            <p>{contact.name}</p>
-            <p>{contact.company}</p>
-            <p>{contact.email}</p>
-            <p>{contact.phoneNumber}</p>
-            {contact.editedAt && <span>(Edited)</span>}
-          </span>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              <p>{contact.name}</p>
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <p>{contact.jobTitle}</p>
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <p>{contact.company}</p>
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <p>{contact.phoneNumber}</p>
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <p>{contact.email}</p>
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <p>{contact.url}</p>
+            </Typography>
+          </CardContent>
         )}
 
         {authUser.uid === contact.userId && (
           <span>
             {editMode ? (
               <span>
-                <button onClick={this.onSaveEditText}>Save</button>
+                <button onClick={this.onSaveEditContact}>Save</button>
                 <button onClick={this.onToggleEditMode}>Reset</button>
               </span>
             ) : (
@@ -70,7 +163,7 @@ class ContactItem extends Component {
             )}
           </span>
         )}
-      </li>
+      </Card>
     );
   }
 }

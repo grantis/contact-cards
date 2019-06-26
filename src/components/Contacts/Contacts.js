@@ -13,10 +13,10 @@ class Contacts extends Component {
     this.state = {
       name: '',
       jobTitle: '',
-      url: '',
       company: '',
-      email: '',
       phoneNumber: '',
+      email: '',
+      url: '',
       loading: false,
       contacts: [],
       limit: 5,
@@ -85,19 +85,19 @@ class Contacts extends Component {
     this.props.firebase.contacts().push({
       name: this.state.name,
       jobTitle: this.state.jobTitle,
-      url: this.state.url,
       company: this.state.company,
-      email: this.state.email,
       phoneNumber: this.state.phoneNumber,
+      email: this.state.email,
+      url: this.state.url,
       userId: authUser.uid,
       createdAt: this.props.firebase.serverValue.TIMESTAMP,
     });
 
     this.setState({ name: '' });
-    this.setState({ company: '' });
-    this.setState({ email: '' });
-    this.setState({ phoneNumber: '' });
     this.setState({ jobTitle: '' });
+    this.setState({ company: '' });
+    this.setState({ phoneNumber: '' });
+    this.setState({ email: '' });
     this.setState({ url: '' });
 
     event.preventDefault();
@@ -105,23 +105,25 @@ class Contacts extends Component {
 
   onEditContact = (
     contact,
+    authUser,
     name,
-    email,
-    phoneNumber,
-    url,
     jobTitle,
     company,
+    phoneNumber,
+    email,
+    url,
   ) => {
-    const { uid, ...contactSnapshot } = contact;
-
-    this.props.firebase.contact(contact.uid).set({
+    const { uid, contactSnapshot } = contact;
+    console.log(authUser);
+    this.props.firebase.contact(uid).set({
       ...contactSnapshot,
-      name,
-      jobTitle,
-      url,
-      company,
-      email,
-      phoneNumber,
+      name: name,
+      jobTitle: jobTitle,
+      company: company,
+      phoneNumber: phoneNumber,
+      email: email,
+      url: url,
+      userId: authUser.uid,
       editedAt: this.props.firebase.serverValue.TIMESTAMP,
     });
   };
@@ -154,13 +156,6 @@ class Contacts extends Component {
         {authUser => (
           <Container>
             <div>
-              {!loading && contacts && (
-                <button type="button" onClick={this.onNextPage}>
-                  More
-                </button>
-              )}
-
-              {loading && <div>Loading ...</div>}
               <Container maxWidth="sm">
                 <ContactForm
                   authUser={authUser}
@@ -187,9 +182,14 @@ class Contacts extends Component {
                   onRemoveContact={this.onRemoveContact}
                 />
               )}
-
+              {!loading && contacts && (
+                <button type="button" onClick={this.onNextPage}>
+                  More
+                </button>
+              )}
               {!contacts && <div>There are no contacts ...</div>}
             </div>
+            {loading && <div>Loading ...</div>}
           </Container>
         )}
       </AuthUserContext.Consumer>

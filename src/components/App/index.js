@@ -5,7 +5,6 @@ import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 
@@ -17,14 +16,14 @@ const App = () => (
     <div>
       <Navigation />
       <Route path={ROUTES.HOME} component={HomePage} />
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route
+      {/* <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+      <Route path={ROUTES.SIGN_IN} component={SignInPage} /> */}
+      {/* <Route
         path={ROUTES.PASSWORD_FORGET}
         component={PasswordForgetPage}
-      />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+      /> */}
+      <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+      {/* <Route exact path={ROUTES.LANDING} component={LandingPage} /> */}
     </div>
   </Router>
 );
