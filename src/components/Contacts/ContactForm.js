@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class ContactForm extends Component {
+  
   render() {
     const {
       authUser,
@@ -31,12 +32,6 @@ class ContactForm extends Component {
           onChange={onChangeName}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="name"
-                  value={name}
-                  onChange={this.onChangeName}
-                /> */}
         <TextField
           fullWidth={true}
           type="text"
@@ -45,13 +40,6 @@ class ContactForm extends Component {
           onChange={onChangeJobTitle}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="Job Title"
-                  value={jobTitle}
-                  onChange={this.onChangeJobTitle}
-                /> */}
-
         <TextField
           fullWidth={true}
           type="text"
@@ -60,12 +48,6 @@ class ContactForm extends Component {
           onChange={onChangeCompany}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="company"
-                  value={company}
-                  onChange={this.onChangeCompany}
-                /> */}
         <TextField
           fullWidth={true}
           type="text"
@@ -74,12 +56,6 @@ class ContactForm extends Component {
           onChange={onChangeEmail}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="email"
-                  value={email}
-                  onChange={this.onChangeEmail}
-                /> */}
         <TextField
           fullWidth={true}
           type="text"
@@ -88,12 +64,6 @@ class ContactForm extends Component {
           onChange={onChangePhoneNumber}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="phoneNumber"
-                  value={phoneNumber}
-                  onChange={this.onChangePhoneNumber}
-                /> */}
         <TextField
           fullWidth={true}
           type="text"
@@ -102,12 +72,6 @@ class ContactForm extends Component {
           onChange={onChangeUrl}
           margin="normal"
         />
-        {/* <input
-                  type="text"
-                  placeholder="url"
-                  value={url}
-                  onChange={this.onChangeUrl}
-                /> */}
         <Button color="primary" type="submit">
           Send
         </Button>
