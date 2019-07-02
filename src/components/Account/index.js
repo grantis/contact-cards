@@ -36,37 +36,12 @@ class LoginManagementBase extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.fetchSignInMethods();
-  // }
-
-  // fetchSignInMethods = () => {
-  //   this.props.firebase.auth
-  //     .fetchSignInMethodsForEmail(this.props.authUser.email)
-  //     .then(activeSignInMethods =>
-  //       this.setState({ activeSignInMethods, error: null }),
-  //     )
-  //     .catch(error => this.setState({ error }));
-  // };
-
   onSocialLoginLink = provider => {
     this.props.firebase.auth.currentUser
       .linkWithPopup(this.props.firebase[provider])
       .then(this.fetchSignInMethods)
       .catch(error => this.setState({ error }));
   };
-
-  // onDefaultLoginLink = password => {
-  //   const credential = this.props.firebase.emailAuthProvider.credential(
-  //     this.props.authUser.email,
-  //     password,
-  //   );
-
-  //   this.props.firebase.auth.currentUser
-  //     .linkAndRetrieveDataWithCredential(credential)
-  //     .then(this.fetchSignInMethods)
-  //     .catch(error => this.setState({ error }));
-  // };
 
   onUnlink = providerId => {
     this.props.firebase.auth.currentUser

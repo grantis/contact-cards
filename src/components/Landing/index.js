@@ -3,7 +3,30 @@ import SignInPage from '../SignIn';
 import './index.scss';
 import Typography from '@material-ui/core/Typography';
 
-const Landing = () => (
+import { AuthUserContext } from '../Session';
+import Navigation from '../Navigation';
+
+const LandingPage = () => (
+  <AuthUserContext.Consumer>
+    {authUser =>
+      authUser ? (
+        <LandingPageAuth authUser={authUser} />
+      ) : (
+        <LandingPageNonAuth />
+      )
+    }
+  </AuthUserContext.Consumer>
+);
+
+const LandingPageAuth = ({ authUser }) => {
+  return (
+    <div>
+      <Navigation />
+    </div>
+  );
+};
+
+const LandingPageNonAuth = () => (
   <div className="landing-title">
     <Typography
       align="center"
@@ -26,4 +49,4 @@ const Landing = () => (
   </div>
 );
 
-export default Landing;
+export default LandingPage;

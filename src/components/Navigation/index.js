@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import { MenuDrawer } from './MenuDrawer';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -16,23 +19,20 @@ const Navigation = () => (
   </AuthUserContext.Consumer>
 );
 
-const NavigationAuth = ({ authUser }) => {
-  return (
-    <div>
-      <ul>
-        <li>
-          <Link to={ROUTES.HOME}>Create Contact Card</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li>
-          <SignOutButton />
-        </li>
-      </ul>
-    </div>
-  );
-};
+class NavigationAuth extends Component {
+  render() {
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <MenuDrawer />
+            <SignOutButton />
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
 
 const NavigationNonAuth = () => (
   <ul>
