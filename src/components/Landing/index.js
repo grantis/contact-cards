@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { AuthUserContext } from '../Session';
 import Navigation from '../Navigation';
-import Search from '../Search';
 
 const LandingPage = () => (
   <AuthUserContext.Consumer>

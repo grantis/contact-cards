@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import ContactList from './ContactList';
-import ContactForm from './ContactForm';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
@@ -12,12 +11,6 @@ class Contacts extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      jobTitle: '',
-      company: '',
-      phoneNumber: '',
-      email: '',
-      url: '',
       loading: false,
       contacts: [],
       limit: 5,
@@ -58,52 +51,6 @@ class Contacts extends Component {
     this.props.firebase.contacts().off();
   }
 
-  onChangeName = event => {
-    this.setState({ name: event.target.value });
-  };
-
-  onChangeCompany = event => {
-    this.setState({ company: event.target.value });
-  };
-
-  onChangeEmail = event => {
-    this.setState({ email: event.target.value });
-  };
-
-  onChangePhoneNumber = event => {
-    this.setState({ phoneNumber: event.target.value });
-  };
-
-  onChangeJobTitle = event => {
-    this.setState({ jobTitle: event.target.value });
-  };
-
-  onChangeUrl = event => {
-    this.setState({ url: event.target.value });
-  };
-
-  onCreateContact = (event, authUser) => {
-    this.props.firebase.contacts().push({
-      name: this.state.name,
-      jobTitle: this.state.jobTitle,
-      company: this.state.company,
-      phoneNumber: this.state.phoneNumber,
-      email: this.state.email,
-      url: this.state.url,
-      userId: authUser.uid,
-      createdAt: this.props.firebase.serverValue.TIMESTAMP,
-    });
-
-    this.setState({ name: '' });
-    this.setState({ jobTitle: '' });
-    this.setState({ company: '' });
-    this.setState({ phoneNumber: '' });
-    this.setState({ email: '' });
-    this.setState({ url: '' });
-
-    event.preventDefault();
-  };
-
   onEditContact = (
     contact,
     authUser,
@@ -141,40 +88,13 @@ class Contacts extends Component {
   };
 
   render() {
-    const {
-      name,
-      jobTitle,
-      url,
-      company,
-      email,
-      phoneNumber,
-      contacts,
-      loading,
-    } = this.state;
+    const { contacts, loading } = this.state;
 
     return (
       <AuthUserContext.Consumer>
         {authUser => (
           <Container>
             <div>
-              <Container maxWidth="sm">
-                <ContactForm
-                  authUser={authUser}
-                  name={name}
-                  jobTitle={jobTitle}
-                  company={company}
-                  phoneNumber={phoneNumber}
-                  email={email}
-                  url={url}
-                  onCreateContact={this.onCreateContact}
-                  onChangeName={this.onChangeName}
-                  onChangeJobTitle={this.onChangeJobTitle}
-                  onChangeCompany={this.onChangeCompany}
-                  onChangePhoneNumber={this.onChangePhoneNumber}
-                  onChangeEmail={this.onChangeEmail}
-                  onChangeUrl={this.onChangeUrl}
-                />
-              </Container>
               {contacts && (
                 <ContactList
                   authUser={authUser}
