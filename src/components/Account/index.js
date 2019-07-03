@@ -7,6 +7,7 @@ import {
   withEmailVerification,
 } from '../Session';
 import { withFirebase } from '../Firebase';
+import Navigation from '../Navigation';
 
 const SIGN_IN_METHODS = [
   {
@@ -19,6 +20,7 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
+        <Navigation />
         <h1>Account: {authUser.email}</h1>
         <LoginManagement authUser={authUser} />
       </div>
@@ -61,7 +63,7 @@ class LoginManagementBase extends Component {
             const onlyOneLeft = activeSignInMethods.length === 1;
             const isEnabled = activeSignInMethods.includes(
               signInMethod.id,
-            ); 
+            );
 
             return (
               <li key={signInMethod.id}>

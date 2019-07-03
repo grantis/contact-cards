@@ -8,7 +8,7 @@ const ContactList = ({
   onEditContact,
   onRemoveContact,
 }) => (
-  <ul>
+  <>
     {contacts.map(contact => (
       <ContactItem
         authUser={authUser}
@@ -18,7 +18,7 @@ const ContactList = ({
         onRemoveContact={onRemoveContact}
       />
     ))}
-  </ul>
+  </>
 );
 
 export default ContactList;

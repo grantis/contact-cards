@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import ContactList from './ContactList';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import './index.scss';
 
 class Contacts extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class Contacts extends Component {
 
   onListenForContacts = () => {
     this.setState({ loading: true });
-
     this.props.firebase
       .contacts()
       .orderByChild('createdAt')
@@ -62,7 +61,6 @@ class Contacts extends Component {
     url,
   ) => {
     const { uid, contactSnapshot } = contact;
-    console.log(authUser);
     this.props.firebase.contact(uid).set({
       ...contactSnapshot,
       name: name,
@@ -93,16 +91,18 @@ class Contacts extends Component {
     return (
       <AuthUserContext.Consumer>
         {authUser => (
-          <Container>
-            <div>
-              {contacts && (
-                <ContactList
-                  authUser={authUser}
-                  contacts={contacts}
-                  onEditContact={this.onEditContact}
-                  onRemoveContact={this.onRemoveContact}
-                />
-              )}
+          <div style={{ marginTop: 50 }}>
+            <Container>
+              <div className="container">
+                {contacts && (
+                  <ContactList
+                    authUser={authUser}
+                    contacts={contacts}
+                    onEditContact={this.onEditContact}
+                    onRemoveContact={this.onRemoveContact}
+                  />
+                )}
+              </div>
               {!loading && contacts && (
                 <Button
                   size="small"
@@ -113,9 +113,9 @@ class Contacts extends Component {
                 </Button>
               )}
               {!contacts && <div>There are no contacts ...</div>}
-            </div>
-            {loading && <div>Loading ...</div>}
-          </Container>
+              {loading && <div>Loading ...</div>}
+            </Container>
+          </div>
         )}
       </AuthUserContext.Consumer>
     );

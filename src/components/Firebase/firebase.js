@@ -30,16 +30,18 @@ class Firebase {
 
     this.googleProvider = new app.auth.GoogleAuthProvider();
 
+    this.search = this.db.ref('/contacts').orderByChild('name');
+
     // configure algolia
-    const algolia = algoliasearch(
+    this.algolia = algoliasearch(
       process.env.REACT_APP_ALGOLIA_APP_ID,
       process.env.REACT_APP_ALGOLIA_API_KEY,
     );
-    const index = algolia.initIndex(
+    this.algoliaIndex = this.algolia.initIndex(
       process.env.REACT_APP_ALGOLIA_INDEX_NAME,
     );
 
-    index.setSettings(
+    this.algoliaIndex.setSettings(
       {
         searchableAttributes: [
           'firstName',
@@ -64,7 +66,7 @@ class Firebase {
       // Specify Algolia's objectID using the Firebase object key
       record.objectID = contact.key;
       // Add or update object
-      index
+      this.algoliaIndex
         .saveObject(record)
         .then(() => {
           console.log(
@@ -85,7 +87,7 @@ class Firebase {
       // Get Algolia's objectID from the Firebase object key
       const objectID = key;
       // Remove the object from Algolia
-      index
+      this.algoliaIndex
         .deleteObject(objectID)
         .then(() => {
           console.log(

@@ -14,7 +14,7 @@ const App = () => (
     <div>
       <Route path={ROUTES.BROWSE} component={BrowsePage} />
       <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      <Route exact path={ROUTES.HOME} component={LandingPage} />
       <Route
         exact
         path={ROUTES.CREATE}

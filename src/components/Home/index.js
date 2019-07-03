@@ -3,12 +3,11 @@ import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import Contacts from '../Contacts';
+import Search from '../Search';
 
-const HomePage = () => (
-  <div>
-    <Contacts />
-  </div>
-);
+const HomePage = () => {
+  return <div>Hello</div>;
+};
 
 const condition = authUser => !!authUser;
 
