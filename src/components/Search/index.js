@@ -1,21 +1,36 @@
-// import React from 'react';
-// import {
-//   InstantSearch,
-//   SearchBox,
-//   Hits,
-// } from 'react-instantsearch-dom';
+import React, { Component } from 'react';
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+} from 'react-instantsearch-dom';
+import { ContactCardContent } from '../Contacts/ContactItem';
+import { withFirebase } from '../Firebase';
+import './index.scss';
 
-// import { withFirebase } from '../Firebase';
+const Hit = ({ hit }) => {
+  return <ContactCardContent contact={hit} />;
+};
 
-// const SearchBase = props => {
-//   return (
-//     <InstantSearch indexName="contacts">
-//       <SearchBox />
-//       <Hits />
-//     </InstantSearch>
-//   );
-// };
+const Content = () => {
+  return <Hits hitComponent={Hit} />;
+};
 
-// const Search = withFirebase(SearchBase);
+class SearchBase extends Component {
+  render() {
+    return (
+      <InstantSearch
+        searchClient={this.props.firebase.algolia}
+        indexName="contacts"
+      >
+        <SearchBox />
 
-// export default Search;
+        <Content updateContact={this.updateContact} />
+      </InstantSearch>
+    );
+  }
+}
+
+const Search = withFirebase(SearchBase);
+
+export default Search;

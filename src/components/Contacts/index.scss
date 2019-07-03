@@ -1,3 +1,11 @@
 .contact-form-container {
   max-width: 1em;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: '. . .' '. . .' '. . .';
+  grid-gap: 20px 20px;
+}

@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import './index.scss';
 
 const EditCardOptions = props => {
   const {
@@ -51,29 +52,31 @@ const EditCardOptions = props => {
   );
 };
 
-const ContactCardContent = props => {
+export const ContactCardContent = props => {
   const { contact } = props;
   return (
-    <CardContent>
-      <Typography variant="h2" component="h2">
-        <p>{contact.name}</p>
-      </Typography>
-      <Typography variant="h3" component="h2">
-        <p>{contact.jobTitle}</p>
-      </Typography>
-      <Typography variant="h5" component="h2">
-        <p>{contact.company}</p>
-      </Typography>
-      <Typography variant="h5" component="h2">
-        <p>{contact.phoneNumber}</p>
-      </Typography>
-      <Typography variant="h5" component="h2">
-        <p>{contact.email}</p>
-      </Typography>
-      <Typography variant="h5" component="h2">
-        <p>{contact.url}</p>
-      </Typography>
-    </CardContent>
+    <div className="grid-item">
+      <CardContent>
+        <Typography variant="h2" component="h2">
+          <p>{contact.name}</p>
+        </Typography>
+        <Typography variant="h3" component="h2">
+          <p>{contact.jobTitle}</p>
+        </Typography>
+        <Typography variant="h5" component="h2">
+          <p>{contact.company}</p>
+        </Typography>
+        <Typography variant="h5" component="h2">
+          <p>{contact.phoneNumber}</p>
+        </Typography>
+        <Typography variant="h5" component="h2">
+          <p>{contact.email}</p>
+        </Typography>
+        <Typography variant="h5" component="h2">
+          <p>{contact.url}</p>
+        </Typography>
+      </CardContent>
+    </div>
   );
 };
 class ContactItem extends Component {

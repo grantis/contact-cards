@@ -23,6 +23,7 @@ const LandingPageAuth = ({ authUser }) => {
   return (
     <div>
       <Navigation />
+      <Search />
     </div>
   );
 };

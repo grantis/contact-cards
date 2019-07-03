@@ -37,7 +37,7 @@ class NavigationAuth extends Component {
 const NavigationNonAuth = () => (
   <ul>
     <li>
-      <Link to={ROUTES.LANDING} />
+      <Link to={ROUTES.HOME} />
     </li>
   </ul>
 );

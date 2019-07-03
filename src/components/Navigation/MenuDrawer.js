@@ -42,13 +42,15 @@ export const MenuDrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['CREATE', 'BROWSE'].map((text, index) => (
-          <ListItem button key={text}>
-            <Link to={ROUTES[text]}>
-              <ListItemText primary={text} />
-            </Link>
-          </ListItem>
-        ))}
+        {['CREATE', 'BROWSE', 'HOME', 'ACCOUNT'].map(
+          (text, index) => (
+            <ListItem button key={text}>
+              <Link to={ROUTES[text]}>
+                <ListItemText primary={text} />
+              </Link>
+            </ListItem>
+          ),
+        )}
       </List>
     </div>
   );
