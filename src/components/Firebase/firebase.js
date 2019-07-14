@@ -54,7 +54,7 @@ class Firebase {
         ],
       },
       (err, content) => {
-        console.log(content);
+        console.error(err);
       },
     );
 

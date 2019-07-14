@@ -42,9 +42,9 @@ export const MenuDrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['CREATE', 'BROWSE', 'HOME', 'ACCOUNT'].map(
+        {['CREATE', 'BROWSE', 'HOME', 'ACCOUNT', 'A2Z'].map(
           (text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={index}>
               <Link to={ROUTES[text]}>
                 <ListItemText primary={text} />
               </Link>
